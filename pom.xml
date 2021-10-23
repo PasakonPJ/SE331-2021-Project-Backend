@@ -11,8 +11,8 @@
     <groupId>se331.lab</groupId>
     <artifactId>rest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>lab07</name>
-    <description>lab07</description>
+    <name>final-backend</name>
+    <description>final-backend</description>
     <properties>
         <java.version>16</java.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -66,9 +66,34 @@
             <artifactId>google-cloud-storage</artifactId>
             <version>2.1.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.mobile</groupId>
+            <artifactId>spring-mobile-device</artifactId>
+            <version>2.0.0.M3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
