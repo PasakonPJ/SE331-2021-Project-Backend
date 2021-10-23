@@ -15,9 +15,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import se331.lab.rest.security.JwtTokenUtil;
 import se331.lab.rest.security.entity.JwtUser;
+import se331.lab.rest.security.entity.User;
+import se331.lab.rest.security.repository.UserRepository;
+import se331.lab.rest.util.LabMapper;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,7 +40,8 @@ public class AuthenticationRestController {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
+    @Autowired
+    UserRepository userRepository;
 
     @PostMapping("${jwt.route.authentication.path}")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
@@ -54,6 +60,15 @@ public class AuthenticationRestController {
         final String token = jwtTokenUtil.generateToken(userDetails, device);
         Map result = new HashMap();
         result.put("token", token);
+        User user = userRepository.findById(((JwtUser) userDetails).getId()).orElse(null);
+        if(user.getFirstname()!=null){
+            result.put("user", LabMapper.INSTANCE.getAdminAuthDTO(user));
+        }
+//        List<String> temp = new ArrayList<>();
+//        temp.add(user.getAuthorities().get(0).toString());
+//        if(user.getFirstname()!=null){
+//            result.put("user", LabMapper.INSTANCE.getUserAuthDTO(temp));
+//        }
         return ResponseEntity.ok(result);
     }
 

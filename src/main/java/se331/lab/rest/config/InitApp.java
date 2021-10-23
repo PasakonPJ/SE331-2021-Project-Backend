@@ -16,7 +16,9 @@ import se331.lab.rest.repository.PatientRepository;
 import se331.lab.rest.repository.VaccineRepository;
 import se331.lab.rest.security.entity.Authority;
 import se331.lab.rest.security.entity.AuthorityName;
+import se331.lab.rest.security.entity.User;
 import se331.lab.rest.security.repository.AuthorityRepository;
+import se331.lab.rest.security.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -34,9 +36,11 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     @Autowired
     AuthorityRepository authorityRepository;
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     VaccineRepository vaccineRepository;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+    User u1,u2,u3,u4,u5,u6;
 
     @Override
     @Transactional
@@ -47,6 +51,10 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         authorityRepository.save(authAdmin);
         authorityRepository.save(authDoctor);
 //        authorityRepository.save(authPatient);
+        creteUser();
+        u1.getAuthorities().add(authAdmin);
+        u2.getAuthorities().add(authDoctor);
+        u3.getAuthorities().add(authDoctor);
        Admin admin=adminRepository.save(Admin.builder().username("admin").password(passwordEncoder.encode("123456")).build());
         Doctor doctor1,doctor2;
         doctor1 = doctorRepository.save( Doctor.builder().firstname("passakon").lastname("paingjai").email("kong@test.com").username("kong")
@@ -90,5 +98,20 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
 //        vaccine1.getPatientsVaccine().add(patient1);
 //        vaccine2.getPatientsVaccine().add(patient2);
 //        vaccine3.getPatientsVaccine().add(patient3);
+    }
+
+    private void creteUser(){
+        u1 = User.builder().firstname("admin").username("admin").lastname("admin").password(passwordEncoder.encode("123456")).enabled(true)
+                .email("admin@test.com").lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+                .build();
+        u2=User.builder().firstname("passakon").username("kong").lastname("paingjai").email("kong@test.com").password(passwordEncoder.encode("123456")).enabled(true)
+                .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+                .build();
+        u3=User.builder().firstname("thitisan").username("doctor2").lastname("chailuek").email("doctor@test.com").password(passwordEncoder.encode("123456")).enabled(true)
+                .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
+                .build();
+        userRepository.save(u1);
+        userRepository.save(u2);
+        userRepository.save(u3);
     }
 }
