@@ -78,7 +78,7 @@ public class AdminController {
         return new ResponseEntity<>(LabMapper.INSTANCE.getUserApproveDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<?> getIndividualUser(@PathVariable(value = "id") Long id) {
         User output = userService.findById(id).get();
         if (output != null) {
