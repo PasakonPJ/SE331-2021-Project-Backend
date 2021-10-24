@@ -24,7 +24,7 @@ public class Patient {
     String email;
     @ManyToOne
     Doctor doctor;
-    @ManyToMany
+    @OneToMany(mappedBy = "patientGotVaccine")
     @Builder.Default
     List<Vaccine> vaccine = new ArrayList<>();
 

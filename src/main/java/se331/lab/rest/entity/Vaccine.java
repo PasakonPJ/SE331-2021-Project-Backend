@@ -18,7 +18,6 @@ public class Vaccine {
     Long id;
     String vaccinatedDate;
     String vaccineName;
-//    @ManyToMany
-//    @Builder.Default
-//    List<Patient> patientsVaccine= new ArrayList<>();
+    @ManyToOne
+    Patient patientGotVaccine;
 }
