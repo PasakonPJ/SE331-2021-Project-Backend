@@ -13,7 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientDTO {
     Long id;
-    String username;
+    String firstname;
+    String lastname;
     String email;
     DoctorPatientDTO doctor;
     List<VaccinePatientDTO> vaccine;

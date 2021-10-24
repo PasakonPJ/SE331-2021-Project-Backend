@@ -35,6 +35,7 @@ public class AdminController {
     @PutMapping("/user/{id}")
     public ResponseEntity<UserDTO> updateUserStatus(@PathVariable(value = "id") Long id, @RequestBody AuthUserDTO user){
         User newUser = userRepository.findById(id).get();
+        newUser.setApprove(true);
         newUser.getAuthorities().remove(0);
         if(user.getRole().get(0).equals("ROLE_PATIENT")){
             Authority a= authorityRepository.findByName(AuthorityName.ROLE_PATIENT);
@@ -46,6 +47,8 @@ public class AdminController {
         final User updatedUser = userService.save(newUser);
         if(updatedUser.getAuthorities().get(0).getName().name().equals("ROLE_PATIENT")){
             patientService.save(Patient.builder().username(updatedUser.getUsername())
+                            .firstname(updatedUser.getFirstname())
+                            .lastname(updatedUser.getLastname())
                     .password(passwordEncoder.encode(updatedUser.getPassword()))
                     .email(updatedUser.getEmail())
                     .doctor(null)
@@ -54,6 +57,8 @@ public class AdminController {
         }else{
             doctorRepository.save(Doctor.builder().username(updatedUser.getUsername())
                     .password(passwordEncoder.encode(updatedUser.getPassword()))
+                    .firstname(updatedUser.getFirstname())
+                    .lastname(updatedUser.getLastname())
                     .email(updatedUser.getEmail())
                     .patients(null)
                     .build());
