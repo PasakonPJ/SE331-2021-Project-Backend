@@ -17,6 +17,8 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     Long id;
+    String firstname;
+    String lastname;
     String username;
     String password;
     String email;

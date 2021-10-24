@@ -66,11 +66,11 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .password(passwordEncoder.encode("doctor")).build());
         Patient patient1,patient2,patient3;
 
-        patient1 = Patient.builder().username("kp").email("kp@kp.com")
+        patient1 = Patient.builder().username("kp").email("kp@kp.com").firstname("kamumum").lastname("thai")
                 .password(passwordEncoder.encode("123456")).build() ;
-        patient2 = Patient.builder().username("fax").email("fsx@fax.com")
+        patient2 = Patient.builder().username("fax").email("fsx@fax.com").firstname("kingoftheworld").lastname("chaina")
                 .password(passwordEncoder.encode("123456")).build() ;
-        patient3 = Patient.builder().username("kong").email("kong@kong.com")
+        patient3 = Patient.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname")
                 .password(passwordEncoder.encode("123456")).build() ;
         admin.getAuthorities().add(authAdmin);
         doctor1.getAuthorities().add(authDoctor);
