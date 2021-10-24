@@ -12,6 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+    Long id;
+    String firstname;
+    String lastname;
     String username;
     String email;
 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import se331.lab.rest.entity.Doctor;
 import se331.lab.rest.entity.Patient;
 import se331.lab.rest.repository.DoctorRepository;
@@ -75,5 +76,15 @@ public class AdminController {
         HttpHeaders responseHeader = new HttpHeaders();
         responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
         return new ResponseEntity<>(LabMapper.INSTANCE.getUserApproveDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<?> getIndividualUser(@PathVariable(value = "id") Long id) {
+        User output = userService.findById(id).get();
+        if (output != null) {
+            return ResponseEntity.ok(LabMapper.INSTANCE.getUserDTO(output));
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The given id is not found");
+        }
     }
 }
