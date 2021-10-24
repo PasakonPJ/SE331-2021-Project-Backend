@@ -1,11 +1,12 @@
 package se331.lab.rest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import se331.lab.rest.entity.Doctor;
 import se331.lab.rest.entity.Patient;
@@ -58,5 +59,16 @@ public class AdminController {
                     .build());
         }
         return ResponseEntity.ok(LabMapper.INSTANCE.getUserDTO(updatedUser));
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> getAwaitingApprovalUsers(@RequestParam(value = "_limit", required = false) Integer perPage
+            , @RequestParam(value = "_page", required = false) Integer page){
+        perPage = perPage == null ? 3 : perPage;
+        page = page == null ? 1 : page;
+        Page<User> pageOutput = userService.getWaitUsers(perPage, page);
+        HttpHeaders responseHeader = new HttpHeaders();
+        responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
+        return new ResponseEntity<>(LabMapper.INSTANCE.getUserApproveDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
     }
 }

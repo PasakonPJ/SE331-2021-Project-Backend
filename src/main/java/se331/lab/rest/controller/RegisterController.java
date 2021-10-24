@@ -37,6 +37,7 @@ public class RegisterController {
         user.setFirstname(user.getFirstname());
         user.setLastname(user.getLastname());
         user.getAuthorities().add(authorityRepository.findById(4L).get());
+        user.setApprove(false);
 //        user.getAuthorities().add(authority);
 //       User newUser = User.builder().username(user.getUsername()).email(user.getEmail()).password(user.getPassword())
 //               .enabled(true).authorities(userAuth)

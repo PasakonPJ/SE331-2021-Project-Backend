@@ -2,6 +2,7 @@ package se331.lab.rest.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import se331.lab.rest.security.entity.User;
 import se331.lab.rest.security.repository.UserRepository;
@@ -22,5 +23,10 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User save(User newUser) {
         return userRepository.save(newUser);
+    }
+
+    @Override
+    public Page<User> findWaitingUsers(Integer perPage, Integer page) {
+        return userRepository.findByApproveIsFalse(PageRequest.of(page-1,perPage));
     }
 }

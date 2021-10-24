@@ -104,27 +104,30 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     }
 
     private void creteUser(){
-        u1 = User.builder().firstname("admin").username("admin").lastname("admin").password(passwordEncoder.encode("123456")).enabled(true)
+        u1 = User.builder().firstname("admin").username("admin").lastname("admin").password(passwordEncoder.encode("123456")).enabled(true).approve(true)
                 .email("admin@test.com").lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
-        u2=User.builder().firstname("passakon").username("kong").lastname("paingjai").email("kong@test.com").password(passwordEncoder.encode("123456")).enabled(true)
+        u2=User.builder().firstname("passakon").username("kong").lastname("paingjai").email("kong1@test.com").password(passwordEncoder.encode("123456")).enabled(true).approve(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
-        u3=User.builder().firstname("thitisan").username("doctor2").lastname("chailuek").email("doctor@test.com").password(passwordEncoder.encode("123456")).enabled(true)
+        u3=User.builder().firstname("thitisan").username("doctor2").lastname("chailuek").email("doctor@test.com").password(passwordEncoder.encode("123456")).enabled(true).approve(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
-        u4 = User.builder().username("fax").email("fsx@fax.com").firstname("kingoftheworld").lastname("chaina")
+        u4 = User.builder().username("fax").email("fsx@fax.com").firstname("kingoftheworld").lastname("chaina").approve(true).enabled(true)
                 .password(passwordEncoder.encode("123456")).lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
-        u5=User.builder().firstname("passakon").username("kong").lastname("paingjai").email("kong@test.com").password(passwordEncoder.encode("123456")).enabled(true)
+        u5=User.builder().firstname("passakon").username("gong").lastname("paingjai").email("kong2@test.com").password(passwordEncoder.encode("123456")).enabled(true).approve(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
-        u6=User.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname")
+        u6=User.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname").approve(true)
                 .password(passwordEncoder.encode("123456")).enabled(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
         userRepository.save(u1);
         userRepository.save(u2);
         userRepository.save(u3);
+        userRepository.save(u4);
+        userRepository.save(u5);
+        userRepository.save(u6);
     }
 }
