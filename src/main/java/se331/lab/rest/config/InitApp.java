@@ -45,12 +45,14 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     @Override
     @Transactional
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-//        Authority authPatient = Authority.builder().name(AuthorityName.ROLE_PATIENT).build();
+        Authority authPatient = Authority.builder().name(AuthorityName.ROLE_PATIENT).build();
         Authority authDoctor = Authority.builder().name(AuthorityName.ROLE_DOCTOR).build();
         Authority authAdmin = Authority.builder().name(AuthorityName.ROLE_ADMIN).build();
+        Authority authUser = Authority.builder().name(AuthorityName.ROLE_USER).build();
         authorityRepository.save(authAdmin);
         authorityRepository.save(authDoctor);
-//        authorityRepository.save(authPatient);
+        authorityRepository.save(authPatient);
+        authorityRepository.save(authUser);
         creteUser();
         u1.getAuthorities().add(authAdmin);
         u2.getAuthorities().add(authDoctor);

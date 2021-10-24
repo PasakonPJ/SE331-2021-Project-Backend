@@ -14,4 +14,9 @@ public class PatientServiceImpl implements PatientService{
     public Page<Patient> getPatients(Integer perPage, Integer page) {
         return patientDao.getPatient(perPage,page);
     }
+
+    @Override
+    public void save(Patient build) {
+        patientDao.save(build);
+    }
 }

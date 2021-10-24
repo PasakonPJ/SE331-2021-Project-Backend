@@ -5,4 +5,6 @@ import se331.lab.rest.entity.Patient;
 
 public interface PatientService {
     Page<Patient> getPatients(Integer perPage, Integer page);
+
+    void save(Patient build);
 }

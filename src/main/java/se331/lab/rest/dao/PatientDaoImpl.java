@@ -17,4 +17,9 @@ public class PatientDaoImpl implements PatientDao{
     public Page<Patient> getPatient(Integer perPage, Integer page) {
         return patientRepository.findAll(PageRequest.of(page-1,perPage));
     }
+
+    @Override
+    public void save(Patient build) {
+        patientRepository.save(build);
+    }
 }
