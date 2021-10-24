@@ -11,8 +11,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-    String username;
-    String email;
-
+public class AuthUserDTO {
+    List<String> role;
 }

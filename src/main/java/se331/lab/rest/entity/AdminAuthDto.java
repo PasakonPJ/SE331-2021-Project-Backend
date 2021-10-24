@@ -16,4 +16,5 @@ import java.util.List;
 public class AdminAuthDto {
     String firstname;
     String lastname;
+    List<String> authorities;
 }
