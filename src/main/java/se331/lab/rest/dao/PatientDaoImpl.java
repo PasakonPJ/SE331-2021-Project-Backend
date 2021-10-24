@@ -27,4 +27,9 @@ public class PatientDaoImpl implements PatientDao{
     public Patient findById(Long id) {
         return patientRepository.getById(id);
     }
+
+    @Override
+    public Page<Patient> getPatientDoctor(Integer perPage, Integer page) {
+        return patientRepository.findByDoctorIsNull(PageRequest.of(page-1,perPage));
+    }
 }

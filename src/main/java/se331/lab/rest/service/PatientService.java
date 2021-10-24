@@ -9,4 +9,6 @@ public interface PatientService {
     void save(Patient build);
 
     Patient findById(Long id);
+
+    Page<Patient> getPatientsDoctor(Integer perPage, Integer page);
 }

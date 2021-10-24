@@ -9,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import se331.lab.rest.entity.Doctor;
+import se331.lab.rest.entity.DoctorVaccineDTO;
 import se331.lab.rest.entity.Patient;
 import se331.lab.rest.entity.Vaccine;
+import se331.lab.rest.repository.DoctorRepository;
 import se331.lab.rest.repository.VaccineRepository;
 import se331.lab.rest.service.PatientService;
 import se331.lab.rest.util.LabMapper;
@@ -21,6 +24,8 @@ import java.util.Date;
 
 @Controller
 public class PatientController {
+    @Autowired
+    DoctorRepository doctorRepository;
     @Autowired
     PatientService patientService;
     @Autowired
@@ -38,7 +43,17 @@ public class PatientController {
 
     }
 
+    @GetMapping("/patients/doctor")
+    public ResponseEntity<?> getPatientDoctorList(@RequestParam(value = "_limit", required = false) Integer perPage
+            , @RequestParam(value = "_page", required = false) Integer page){
+        perPage = perPage == null ? 3 : perPage;
+        page = page == null ? 1 : page;
+        Page<Patient>  pageOutput = patientService.getPatientsDoctor(perPage, page);
+        HttpHeaders responseHeader = new HttpHeaders();
+        responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
+        return new ResponseEntity<>(LabMapper.INSTANCE.getPatientDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
 
+    }
     @GetMapping("/patients/{id}")
     public ResponseEntity<?> getPatientById(@PathVariable("id") Long id){
         Patient output = patientService.findById(id);
@@ -50,15 +65,13 @@ public class PatientController {
     }
 
     @PostMapping("/patients/vaccine/{id}")
-    public ResponseEntity<?> addVaccineToPatient(@PathVariable("id") Long id,@RequestBody String vaccine){
+    public ResponseEntity<?> addVaccineToPatient(@PathVariable("id") Long id,@RequestBody DoctorVaccineDTO vaccine){
         Patient output = patientService.findById(id);
-        Vaccine v = Vaccine.builder().vaccineName(vaccine).vaccinatedDate(java.time.LocalDate.now().toString()).patientGotVaccine(output).build();
+        Doctor doctor = doctorRepository.findById(vaccine.getId()).get();
+        Vaccine v = Vaccine.builder().vaccineName(vaccine.getVaccine()).patientGotVaccine(output).vaccinatedDate(java.time.LocalDate.now().toString()).build();
         output.getVaccine().add(v);
+        output.setDoctor(doctor);
         vaccineRepository.save(v);
-        if (output != null) {
-            return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The given id is not found");
-        }
+        return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
     }
 }

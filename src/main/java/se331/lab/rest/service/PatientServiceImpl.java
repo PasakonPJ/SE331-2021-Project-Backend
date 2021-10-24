@@ -24,4 +24,9 @@ public class PatientServiceImpl implements PatientService{
     public Patient findById(Long id) {
         return patientDao.findById(id);
     }
+
+    @Override
+    public Page<Patient> getPatientsDoctor(Integer perPage, Integer page) {
+        return patientDao.getPatientDoctor( perPage,  page);
+    }
 }
