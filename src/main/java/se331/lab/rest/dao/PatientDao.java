@@ -7,4 +7,6 @@ public interface PatientDao {
     Page<Patient> getPatient(Integer perPage, Integer page);
 
     void save(Patient build);
+
+    Patient findById(Long id);
 }

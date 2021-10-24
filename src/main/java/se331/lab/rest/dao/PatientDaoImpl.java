@@ -22,4 +22,9 @@ public class PatientDaoImpl implements PatientDao{
     public void save(Patient build) {
         patientRepository.save(build);
     }
+
+    @Override
+    public Patient findById(Long id) {
+        return patientRepository.getById(id);
+    }
 }

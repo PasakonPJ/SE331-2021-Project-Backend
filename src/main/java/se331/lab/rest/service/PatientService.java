@@ -7,4 +7,6 @@ public interface PatientService {
     Page<Patient> getPatients(Integer perPage, Integer page);
 
     void save(Patient build);
+
+    Patient findById(Long id);
 }
