@@ -73,8 +73,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/doctors/mypatient").permitAll()
                 .antMatchers(HttpMethod.GET,"/user/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/users").permitAll()
-                .antMatchers(HttpMethod.POST,"/comment/{id}").permitAll()
                 .antMatchers(HttpMethod.GET,"/comment/{id}").permitAll()
+                .antMatchers(HttpMethod.POST,"/comment/{id}").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/comment/{id}").permitAll()
+                .antMatchers(HttpMethod.PUT,"/comment/{id}").permitAll()
                 .anyRequest().authenticated();
 
         // Custom JWT based security filter

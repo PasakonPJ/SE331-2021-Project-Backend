@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import se331.lab.rest.entity.*;
 import se331.lab.rest.repository.CommentRepository;
 import se331.lab.rest.repository.DoctorRepository;
+import se331.lab.rest.repository.PatientRepository;
 import se331.lab.rest.security.entity.User;
 import se331.lab.rest.service.PatientService;
 import se331.lab.rest.util.LabMapper;
@@ -25,6 +26,8 @@ public class CommentController {
     CommentRepository commentRepository;
     @Autowired
     PatientService patientService;
+    @Autowired
+    PatientRepository patientRepository;
     @Autowired
     DoctorRepository doctorRepository;
 
@@ -54,6 +57,14 @@ public class CommentController {
         return new ResponseEntity<>(LabMapper.INSTANCE.getCommentDoctorDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/comment/{id}")
+    public ResponseEntity<?> deleteComment(@PathVariable("id") Long id){
+       Patient patient= patientRepository.findByComment_Id(id).get(0);
+       patient.setComment(null);
+        Doctor doctor = doctorRepository.findByComment_Id(id).get(0);
+        doctor.setComment(null);
+        commentRepository.deleteById(id);
+        return ResponseEntity.ok("delete successfully");
+    }
 
 }

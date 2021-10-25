@@ -19,7 +19,7 @@ import se331.lab.rest.util.LabMapper;
 public class DoctorController {
     @Autowired
     DoctorService doctorService;
- 
+
     @GetMapping("/doctors")
     public ResponseEntity<?> getDoctorList(@RequestParam(value = "_limit", required = false) Integer perPage
             , @RequestParam(value = "_page", required = false) Integer page){
