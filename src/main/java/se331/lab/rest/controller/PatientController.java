@@ -34,7 +34,7 @@ public class PatientController {
     @GetMapping("/patients")
     public ResponseEntity<?> getPatientList(@RequestParam(value = "_limit", required = false) Integer perPage
             , @RequestParam(value = "_page", required = false) Integer page){
-        perPage = perPage == null ? 3 : perPage;
+        perPage = perPage == null ? 6 : perPage;
         page = page == null ? 1 : page;
         Page<Patient>  pageOutput = patientService.getPatients(perPage, page);
         HttpHeaders responseHeader = new HttpHeaders();
@@ -67,11 +67,15 @@ public class PatientController {
     @PostMapping("/patients/vaccine/{id}")
     public ResponseEntity<?> addVaccineToPatient(@PathVariable("id") Long id,@RequestBody DoctorVaccineDTO vaccine){
         Patient output = patientService.findById(id);
-        Doctor doctor = doctorRepository.findById(vaccine.getId()).get();
+        Doctor doctor;
         Vaccine v = Vaccine.builder().vaccineName(vaccine.getVaccine()).patientGotVaccine(output).vaccinatedDate(java.time.LocalDate.now().toString()).build();
+        if(vaccine.getId()!=null){
+             doctor = doctorRepository.findById(vaccine.getId()).get();
+            output.setDoctor(doctor);
+        }
         output.getVaccine().add(v);
-        output.setDoctor(doctor);
         vaccineRepository.save(v);
         return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
     }
+
 }
