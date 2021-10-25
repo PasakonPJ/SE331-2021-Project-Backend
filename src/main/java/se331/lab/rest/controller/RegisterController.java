@@ -1,8 +1,5 @@
 package se331.lab.rest.controller;
 
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,7 +27,7 @@ public class RegisterController {
     List<Authority> userAuth = new ArrayList<>();
     Authority authority = new Authority();
     @PostMapping("/signup")
-    public ResponseEntity<?> saveUser(@RequestBody User user) throws JSONException {
+    public ResponseEntity<?> saveUser(@RequestBody User user) {
         User isRegis = userRepository.findByUsername(user.getUsername());
         if(isRegis==null){
             authority.setName(AuthorityName.ROLE_USER);
