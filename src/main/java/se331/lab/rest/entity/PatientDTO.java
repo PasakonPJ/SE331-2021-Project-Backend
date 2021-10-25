@@ -15,7 +15,6 @@ public class PatientDTO {
     Long id;
     String firstname;
     String lastname;
-    String email;
     DoctorPatientDTO doctor;
     List<VaccinePatientDTO> vaccine;
 }

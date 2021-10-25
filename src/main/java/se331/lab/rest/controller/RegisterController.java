@@ -32,6 +32,7 @@ public class RegisterController {
         if(isRegis==null){
             authority.setName(AuthorityName.ROLE_USER);
             userAuth.add(authority);
+//            user.getImageUrl().add(user.getImageUrl().get(0));
             String password = encoder.encode(user.getPassword());
             user.setPassword(password);
             user.setEnabled(true);

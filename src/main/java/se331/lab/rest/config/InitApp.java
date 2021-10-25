@@ -123,6 +123,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .password(passwordEncoder.encode("123456")).enabled(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
+//        u6.getImageUrl().add("https://storage.googleapis.com/download/storage/v1/b/imageupload-d30e4.appspot.com/o/2021-10-25%20225724710-bk5u8jkhawa61.jpg?generation=1635177445823629&alt=media");
         userRepository.save(u1);
         userRepository.save(u2);
         userRepository.save(u3);

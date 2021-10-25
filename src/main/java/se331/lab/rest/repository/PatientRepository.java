@@ -11,4 +11,6 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
     List<Patient> findAll();
     Page<Patient> findByDoctorIsNullAndVaccineIsNull(Pageable pageable);
     List<Patient> findByComment_Id(Long id);
+
+    List<Patient> findByUsername(String id);
 }

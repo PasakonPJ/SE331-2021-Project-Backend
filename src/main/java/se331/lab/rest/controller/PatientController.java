@@ -63,7 +63,15 @@ public class PatientController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The given id is not found");
         }
     }
-
+    @GetMapping("/patients/profile/{username}")
+    public ResponseEntity<?> getPatientByUsername(@PathVariable("username") String id){
+        Patient output = patientService.findByUsername(id).get(0);
+        if (output != null) {
+            return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The given id is not found");
+        }
+    }
     @PostMapping("/patients/vaccine/{id}")
     public ResponseEntity<?> addVaccineToPatient(@PathVariable("id") Long id,@RequestBody DoctorVaccineDTO vaccine){
         Patient output = patientService.findById(id);

@@ -57,6 +57,9 @@ public class User {
     @NotNull
     private Boolean approve;
 
+//    @Column(name = "imageUrl")
+//    @ElementCollection
+//    List<String> imageUrl;
 
     @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)

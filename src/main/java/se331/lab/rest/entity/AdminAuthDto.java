@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AdminAuthDto {
     Long id;
+    String username;
     String firstname;
     String lastname;
     List<String> authorities;

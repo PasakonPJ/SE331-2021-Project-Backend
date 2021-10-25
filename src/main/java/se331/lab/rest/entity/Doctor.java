@@ -30,4 +30,5 @@ public class Doctor {
     @ManyToMany(fetch = FetchType.EAGER)
     @Builder.Default
     private List<Authority> authorities = new ArrayList<>();
+
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import se331.lab.rest.entity.Patient;
 import se331.lab.rest.repository.PatientRepository;
 
+import java.util.List;
+
 @Repository
 @Profile("db")
 public class PatientDaoImpl implements PatientDao{
@@ -31,5 +33,10 @@ public class PatientDaoImpl implements PatientDao{
     @Override
     public Page<Patient> getPatientDoctor(Integer perPage, Integer page) {
         return patientRepository.findByDoctorIsNullAndVaccineIsNull(PageRequest.of(page-1,perPage));
+    }
+
+    @Override
+    public List<Patient> findByUsername(String id) {
+        return patientRepository.findByUsername(id);
     }
 }

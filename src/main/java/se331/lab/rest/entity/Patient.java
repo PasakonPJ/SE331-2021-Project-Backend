@@ -27,7 +27,7 @@ public class Patient {
     @ManyToOne
     Doctor doctor;
     @OneToMany(mappedBy = "patientGotVaccine")
-    @Builder.Default
+            @Builder.Default
     List<Vaccine> vaccine = new ArrayList<>();
 
 //    @ManyToMany(fetch = FetchType.EAGER)
