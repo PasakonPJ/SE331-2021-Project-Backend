@@ -18,7 +18,7 @@ import se331.lab.rest.security.repository.UserRepository;
 import se331.lab.rest.service.PatientService;
 import se331.lab.rest.service.UserService;
 import se331.lab.rest.util.LabMapper;
-
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class AdminController {
 
