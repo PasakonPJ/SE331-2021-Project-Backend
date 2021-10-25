@@ -8,5 +8,5 @@ import se331.lab.rest.entity.Patient;
 public interface DoctorDAO {
     Page<Doctor> getDoctors(Integer perPage, Integer page);
 
-    Page<Doctor> getMyPatient(Long id, PageRequest pageRequest);
+    Page<Doctor> getMyPatient(String id, PageRequest pageRequest);
 }

@@ -37,7 +37,7 @@ public class DoctorController {
             , @RequestParam(value = "_page", required = false) Integer page){
         perPage = perPage == null ? 6 : perPage;
         page = page == null ? 1 : page;
-        Page<Doctor> pageOutput = doctorService.getMyPatient(doctorDTO.getId(), PageRequest.of(page-1,perPage));
+        Page<Doctor> pageOutput = doctorService.getMyPatient(doctorDTO.getUsername(), PageRequest.of(page-1,perPage));
         HttpHeaders responseHeader = new HttpHeaders();
         responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
         return new ResponseEntity<>(LabMapper.INSTANCE.getDoctorDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
