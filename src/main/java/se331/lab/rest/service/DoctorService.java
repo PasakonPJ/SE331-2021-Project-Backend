@@ -10,4 +10,6 @@ public interface DoctorService {
     Page<Doctor> getDoctors(Integer perPage, Integer page);
 
     Page<Doctor> getMyPatient(String id, PageRequest pageRequest);
+
+    Page<Doctor> getMyPatientById(Long id, PageRequest of);
 }

@@ -21,4 +21,9 @@ public class DoctorServiceImpl implements DoctorService{
     public Page<Doctor> getMyPatient(String id, PageRequest pageRequest) {
         return doctorDAO.getMyPatient(id,pageRequest);
     }
+
+    @Override
+    public Page<Doctor> getMyPatientById(Long id, PageRequest of) {
+        return doctorDAO.findByid(id,of);
+    }
 }

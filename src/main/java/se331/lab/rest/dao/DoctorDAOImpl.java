@@ -21,4 +21,9 @@ public class DoctorDAOImpl implements DoctorDAO{
     public Page<Doctor> getMyPatient(String id, PageRequest pageRequest) {
         return doctorRepository.findByUsername(id,pageRequest);
     }
+
+    @Override
+    public Page<Doctor> findByid(Long id, PageRequest of) {
+        return doctorRepository.findById(id,of);
+    }
 }

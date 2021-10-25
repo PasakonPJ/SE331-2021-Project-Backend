@@ -9,4 +9,6 @@ public interface DoctorDAO {
     Page<Doctor> getDoctors(Integer perPage, Integer page);
 
     Page<Doctor> getMyPatient(String id, PageRequest pageRequest);
+
+    Page<Doctor> findByid(Long id, PageRequest of);
 }

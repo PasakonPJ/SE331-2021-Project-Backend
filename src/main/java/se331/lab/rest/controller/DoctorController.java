@@ -42,4 +42,16 @@ public class DoctorController {
         responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
         return new ResponseEntity<>(LabMapper.INSTANCE.getDoctorDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
     }
+
+    @PostMapping("/doctors/{id}")
+    public ResponseEntity<?> getMyPatientById(@PathVariable("id") Long id,@RequestParam(value = "_limit", required = false) Integer perPage
+            , @RequestParam(value = "_page", required = false) Integer page ){
+        perPage = perPage == null ? 6 : perPage;
+        page = page == null ? 1 : page;
+        Page<Doctor> pageOutput = doctorService.getMyPatientById(id, PageRequest.of(page-1,perPage));
+        HttpHeaders responseHeader = new HttpHeaders();
+        responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
+        return new ResponseEntity<>(LabMapper.INSTANCE.getDoctorDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
+
+    }
 }
