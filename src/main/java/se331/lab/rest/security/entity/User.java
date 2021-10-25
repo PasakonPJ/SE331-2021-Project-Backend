@@ -52,6 +52,8 @@ public class User {
     @NotNull
     private Boolean enabled;
 
+    @Column
+    String imageUrl;
 
     @Column(name = "APPROVE")
     @NotNull

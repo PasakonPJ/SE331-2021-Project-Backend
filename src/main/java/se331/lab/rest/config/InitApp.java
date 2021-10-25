@@ -119,7 +119,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         u5=User.builder().firstname("passakon").username("gong").lastname("paingjai").email("kong2@test.com").password(passwordEncoder.encode("123456")).enabled(true).approve(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
-        u6=User.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname").approve(true)
+        u6=User.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname").approve(true).imageUrl("https://storage.googleapis.com/download/storage/v1/b/imageupload-d30e4.appspot.com/o/2021-10-25%20225724710-bk5u8jkhawa61.jpg?generation=1635177445823629&alt=media")
                 .password(passwordEncoder.encode("123456")).enabled(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();

@@ -35,6 +35,7 @@ public class RegisterController {
 //            user.getImageUrl().add(user.getImageUrl().get(0));
             String password = encoder.encode(user.getPassword());
             user.setPassword(password);
+            user.setImageUrl(user.getImageUrl());
             user.setEnabled(true);
             user.setFirstname(user.getFirstname());
             user.setLastname(user.getLastname());

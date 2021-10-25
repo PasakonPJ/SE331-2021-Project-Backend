@@ -18,5 +18,6 @@ public class AdminAuthDto {
     String username;
     String firstname;
     String lastname;
+    String imageUrl;
     List<String> authorities;
 }
