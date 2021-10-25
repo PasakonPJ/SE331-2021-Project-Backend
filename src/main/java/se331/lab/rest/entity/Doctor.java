@@ -25,7 +25,8 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     @Builder.Default
     List<Patient> patients = new ArrayList<>();
-
+    @OneToOne
+    Comment comment;
     @ManyToMany(fetch = FetchType.EAGER)
     @Builder.Default
     private List<Authority> authorities = new ArrayList<>();

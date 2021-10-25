@@ -22,6 +22,8 @@ public class Patient {
     String username;
     String password;
     String email;
+    @OneToOne
+    Comment comment;
     @ManyToOne
     Doctor doctor;
     @OneToMany(mappedBy = "patientGotVaccine")
