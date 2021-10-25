@@ -16,6 +16,7 @@ import se331.lab.rest.security.entity.User;
 import se331.lab.rest.service.PatientService;
 import se331.lab.rest.util.LabMapper;
 
+import java.util.List;
 import java.util.Objects;
 
 @CrossOrigin(maxAge = 3600)
@@ -66,5 +67,11 @@ public class CommentController {
         commentRepository.deleteById(id);
         return ResponseEntity.ok("delete successfully");
     }
-
+    @PutMapping("/comment/edit")
+    public ResponseEntity<?>  editComment(@RequestBody CommentDTO commentDTO){
+        Comment comment = commentRepository.findById(commentDTO.getId()).get();
+        comment.setTopic(commentDTO.getTopic());
+        comment.setRecommend(commentDTO.getRecommend());
+        return ResponseEntity.ok(LabMapper.INSTANCE.getCommentDTO(comment));
+    }
 }
