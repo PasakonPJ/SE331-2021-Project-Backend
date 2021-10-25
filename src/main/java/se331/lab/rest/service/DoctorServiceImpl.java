@@ -2,6 +2,7 @@ package se331.lab.rest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import se331.lab.rest.dao.DoctorDAO;
 import se331.lab.rest.entity.Doctor;
@@ -14,5 +15,10 @@ public class DoctorServiceImpl implements DoctorService{
     @Override
     public Page<Doctor> getDoctors(Integer perPage, Integer page) {
         return doctorDAO.getDoctors(perPage,page);
+    }
+
+    @Override
+    public Page<Doctor> getMyPatient(Long id, PageRequest pageRequest) {
+        return doctorDAO.getMyPatient(id,pageRequest);
     }
 }
