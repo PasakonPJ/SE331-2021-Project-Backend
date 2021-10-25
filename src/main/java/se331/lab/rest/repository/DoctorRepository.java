@@ -14,4 +14,5 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
     List<Doctor> findByComment_Id(Long id);
 
     Page<Doctor> findByUsername(String id, Pageable pageRequest);
+    List<Doctor> findByUsername(String id);
 }

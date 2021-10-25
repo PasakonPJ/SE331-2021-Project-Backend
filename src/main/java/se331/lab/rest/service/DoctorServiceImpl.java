@@ -8,6 +8,8 @@ import se331.lab.rest.dao.DoctorDAO;
 import se331.lab.rest.entity.Doctor;
 import se331.lab.rest.entity.Patient;
 
+import java.util.List;
+
 @Service
 public class DoctorServiceImpl implements DoctorService{
     @Autowired
@@ -25,5 +27,10 @@ public class DoctorServiceImpl implements DoctorService{
     @Override
     public Page<Doctor> getMyPatientById(Long id, PageRequest of) {
         return doctorDAO.findByid(id,of);
+    }
+
+    @Override
+    public List<Doctor> findByUsername(String username) {
+        return doctorDAO.findByUsername(username);
     }
 }

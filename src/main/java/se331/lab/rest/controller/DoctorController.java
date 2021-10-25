@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import se331.lab.rest.entity.Doctor;
 import se331.lab.rest.entity.IdDTO;
+import se331.lab.rest.entity.Patient;
 import se331.lab.rest.repository.DoctorRepository;
 import se331.lab.rest.service.DoctorService;
 import se331.lab.rest.util.LabMapper;
@@ -43,7 +45,7 @@ public class DoctorController {
         return new ResponseEntity<>(LabMapper.INSTANCE.getDoctorDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
     }
 
-    @PostMapping("/doctors/{id}")
+    @GetMapping("/doctors/{id}")
     public ResponseEntity<?> getMyPatientById(@PathVariable("id") Long id,@RequestParam(value = "_limit", required = false) Integer perPage
             , @RequestParam(value = "_page", required = false) Integer page ){
         perPage = perPage == null ? 6 : perPage;
@@ -54,4 +56,15 @@ public class DoctorController {
         return new ResponseEntity<>(LabMapper.INSTANCE.getDoctorDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
 
     }
+
+    @GetMapping("/doctors/profile/{username}")
+    public ResponseEntity<?> getDoctorByUsername(@PathVariable("username") String username){
+        Doctor output = doctorService.findByUsername(username).get(0);
+        if (output != null) {
+            return ResponseEntity.ok(LabMapper.INSTANCE.getDoctorDTO(output));
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The given id is not found");
+        }
+    }
+
 }

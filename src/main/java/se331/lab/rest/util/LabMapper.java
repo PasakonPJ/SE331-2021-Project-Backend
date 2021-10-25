@@ -30,7 +30,7 @@ public interface LabMapper {
 
     CommentDTO getCommentDTO(Comment comment);
 
-
+    DoctorDTO getDoctorDTO(Doctor content);
 
     List<CommentDoctorDTO> getCommentDoctorDTO(List<Comment> content);
 }
