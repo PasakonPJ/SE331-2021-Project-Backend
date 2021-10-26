@@ -85,7 +85,7 @@ public class PatientController {
         vaccineRepository.save(v);
         return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
     }
-    @GetMapping("/patients")
+    @GetMapping("/patients/more")
     public ResponseEntity<?> getPatientReady(@RequestParam(value = "_limit", required = false) Integer perPage
             , @RequestParam(value = "_page", required = false) Integer page){
         perPage = perPage == null ? 6 : perPage;
