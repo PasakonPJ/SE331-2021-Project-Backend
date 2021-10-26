@@ -72,6 +72,7 @@ public class CommentController {
         Comment comment = commentRepository.findById(commentDTO.getId()).get();
         comment.setTopic(commentDTO.getTopic());
         comment.setRecommend(commentDTO.getRecommend());
+        commentRepository.save(comment);
         return ResponseEntity.ok(LabMapper.INSTANCE.getCommentDTO(comment));
     }
 }
