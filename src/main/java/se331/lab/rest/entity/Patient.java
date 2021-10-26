@@ -1,7 +1,6 @@
 package se331.lab.rest.entity;
 
 import lombok.*;
-import se331.lab.rest.security.entity.Authority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
