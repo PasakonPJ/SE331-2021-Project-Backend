@@ -16,4 +16,6 @@ public interface PatientDao {
     Page<Patient> getPatientDoctor(Integer perPage, Integer page);
 
     List<Patient> findByUsername(String id);
+
+    Page<Patient> getPatientReady(Integer perPage, Integer page);
 }

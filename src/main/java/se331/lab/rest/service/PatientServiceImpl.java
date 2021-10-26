@@ -37,4 +37,9 @@ public class PatientServiceImpl implements PatientService{
     public List<Patient> findByUsername(String id) {
         return patientDao.findByUsername(id);
     }
+
+    @Override
+    public Page<Patient> getPatientReady(Integer perPage, Integer page) {
+        return patientDao.getPatientReady(perPage,page);
+    }
 }

@@ -16,4 +16,6 @@ public interface PatientService {
     Page<Patient> getPatientsDoctor(Integer perPage, Integer page);
 
     List<Patient> findByUsername(String id);
+
+    Page<Patient> getPatientReady(Integer perPage, Integer page);
 }

@@ -85,6 +85,18 @@ public class PatientController {
         vaccineRepository.save(v);
         return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
     }
+    @GetMapping("/patients")
+    public ResponseEntity<?> getPatientReady(@RequestParam(value = "_limit", required = false) Integer perPage
+            , @RequestParam(value = "_page", required = false) Integer page){
+        perPage = perPage == null ? 6 : perPage;
+        page = page == null ? 1 : page;
+        Page<Patient>  pageOutput = patientService.getPatientReady(perPage, page);
+        HttpHeaders responseHeader = new HttpHeaders();
+        responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
+        return new ResponseEntity<>(LabMapper.INSTANCE.getPatientDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
+
+    }
+
 
     @PostMapping("/patients/vaccines/{id}")
     public ResponseEntity<?> addMoreVaccineToPatient(@PathVariable("id") Long id,@RequestBody DoctorVaccineDTO vaccine){

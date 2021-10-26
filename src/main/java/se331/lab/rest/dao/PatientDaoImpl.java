@@ -39,4 +39,9 @@ public class PatientDaoImpl implements PatientDao{
     public List<Patient> findByUsername(String id) {
         return patientRepository.findByUsername(id);
     }
+
+    @Override
+    public Page<Patient> getPatientReady(Integer perPage, Integer page) {
+        return patientRepository.findByDoctorIsNullAndVaccineIsNull(PageRequest.of(page-1,perPage));
+    }
 }
