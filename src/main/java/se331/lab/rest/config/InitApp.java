@@ -70,11 +70,11 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .password(passwordEncoder.encode("doctor")).build());
         Patient patient1,patient2,patient3;
 
-        patient1 = Patient.builder().username("kp").email("kp@kp.com").firstname("kamumum").lastname("thai")
+        patient1 = Patient.builder().username("kp").email("kp@kp.com").firstname("kamumum").lastname("thai").imageurl("https://storage.googleapis.com/download/storage/v1/b/upload-final.appspot.com/o/2021-10-27%20020823386-avatar7.png?generation=1635275305299537&alt=media")
                 .password(passwordEncoder.encode("123456")).build() ;
-        patient2 = Patient.builder().username("fax").email("fsx@fax.com").firstname("kingoftheworld").lastname("chaina")
+        patient2 = Patient.builder().username("fax").email("fsx@fax.com").firstname("kingoftheworld").lastname("chaina").imageurl("https://storage.googleapis.com/download/storage/v1/b/upload-final.appspot.com/o/2021-10-27%20020823386-avatar7.png?generation=1635275305299537&alt=media")
                 .password(passwordEncoder.encode("123456")).build() ;
-        patient3 = Patient.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname")
+        patient3 = Patient.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname").imageurl("https://storage.googleapis.com/download/storage/v1/b/upload-final.appspot.com/o/2021-10-27%20020823386-avatar7.png?generation=1635275305299537&alt=media")
                 .password(passwordEncoder.encode("123456")).build() ;
         admin.getAuthorities().add(authAdmin);
         doctor1.getAuthorities().add(authDoctor);
@@ -119,7 +119,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         u5=User.builder().firstname("passakon").username("gong").lastname("paingjai").email("kong2@test.com").password(passwordEncoder.encode("123456")).enabled(true).approve(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
-        u6=User.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname").approve(true).imageurl("https://storage.googleapis.com/download/storage/v1/b/upload-final.appspot.com/o/2021-10-26%20170426574-bk5u8jkhawa61.jpg?generation=1635242667930453&alt=media")
+        u6=User.builder().username("kongp").email("kong@kong.com").firstname("yoyo").lastname("lastname").approve(true).imageurl("https://storage.googleapis.com/download/storage/v1/b/upload-final.appspot.com/o/2021-10-27%20020823386-avatar7.png?generation=1635275305299537&alt=media")
                 .password(passwordEncoder.encode("123456")).enabled(true)
                 .lastPasswordResetDate(Date.from(LocalDate.of(2021, 01, 01).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .build();
