@@ -42,6 +42,6 @@ public class PatientDaoImpl implements PatientDao{
 
     @Override
     public Page<Patient> getPatientReady(Integer perPage, Integer page) {
-        return patientRepository.findByDoctorIsNullAndVaccineIsNull(PageRequest.of(page-1,perPage));
+        return patientRepository.findByDoctorIsNotNullAndVaccineIsNotNull(PageRequest.of(page-1,perPage));
     }
 }
