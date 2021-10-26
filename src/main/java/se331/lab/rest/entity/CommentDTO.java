@@ -15,6 +15,6 @@ public class CommentDTO {
     Long id;
     String topic;
     String recommend;
-    PatientDTO patient;
-    DoctorDTO doctor;
+    PatientDTO patientThatComment;
+    DoctorDTO doctorThatComment;
 }

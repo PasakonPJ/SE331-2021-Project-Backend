@@ -50,6 +50,7 @@ public class AdminController {
             patientService.save(Patient.builder().username(updatedUser.getUsername())
                             .firstname(updatedUser.getFirstname())
                             .lastname(updatedUser.getLastname())
+                    .imageurl(updatedUser.getImageurl())
                     .password(passwordEncoder.encode(updatedUser.getPassword()))
                     .email(updatedUser.getEmail())
                     .doctor(null)
@@ -58,6 +59,7 @@ public class AdminController {
         }else{
             doctorRepository.save(Doctor.builder().username(updatedUser.getUsername())
                     .password(passwordEncoder.encode(updatedUser.getPassword()))
+                            .imageurl(updatedUser.getImageurl())
                     .firstname(updatedUser.getFirstname())
                     .lastname(updatedUser.getLastname())
                     .email(updatedUser.getEmail())

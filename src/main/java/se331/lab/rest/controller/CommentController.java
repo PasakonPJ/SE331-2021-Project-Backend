@@ -39,9 +39,9 @@ public class CommentController {
         if (!Objects.equals(output.getDoctor().getId(), doctor.getId())){
             return ResponseEntity.ok(false);
         }else{
-            Comment comment = Comment.builder().topic(commentDTO.getTopic()).recommend(commentDTO.getRecommend()).doctor(doctor).patient(output).build();
-            output.setComment(comment);
-            doctor.setComment(comment);
+            Comment comment = Comment.builder().topic(commentDTO.getTopic()).recommend(commentDTO.getRecommend()).doctorThatComment(doctor).patientThatComment(output).build();
+            output.getCommentedPatient().add(comment);
+            doctor.getCommentedDoctor().add(comment);
             commentRepository.save(comment);
             return ResponseEntity.ok(LabMapper.INSTANCE.getCommentDTO(comment));
         }
@@ -52,7 +52,7 @@ public class CommentController {
             , @RequestParam(value = "_page", required = false) Integer page){
         perPage = perPage == null ? 6 : perPage;
         page = page == null ? 1 : page;
-        Page<Comment> pageOutput = commentRepository.findByPatient_Id(id, PageRequest.of(page-1,perPage));
+        Page<Comment> pageOutput = commentRepository.findByPatientThatComment_Id(id, PageRequest.of(page-1,perPage));
         HttpHeaders responseHeader = new HttpHeaders();
         responseHeader.set("x-total-count", String.valueOf(pageOutput.getTotalElements()));
         return new ResponseEntity<>(LabMapper.INSTANCE.getCommentDoctorDTO(pageOutput.getContent()), responseHeader, HttpStatus.OK);
@@ -60,10 +60,11 @@ public class CommentController {
 
     @DeleteMapping("/comment/{id}")
     public ResponseEntity<?> deleteComment(@PathVariable("id") Long id){
-       Patient patient= patientRepository.findByComment_Id(id).get(0);
-       patient.setComment(null);
-        Doctor doctor = doctorRepository.findByComment_Id(id).get(0);
-        doctor.setComment(null);
+       Patient patient= patientRepository.findByCommentedPatient_Id(id).get(0);
+       int index = Integer.parseInt(String.valueOf(id-1));
+       patient.getCommentedPatient().set(index,null);
+        Doctor doctor = doctorRepository.findByCommentedDoctor_Id(id).get(0);
+        doctor.getCommentedDoctor().set(index,null);
         commentRepository.deleteById(id);
         return ResponseEntity.ok("delete successfully");
     }

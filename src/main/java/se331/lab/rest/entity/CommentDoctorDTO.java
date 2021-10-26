@@ -13,5 +13,5 @@ public class CommentDoctorDTO {
     Long id;
     String topic;
     String recommend;
-    DoctorDTO doctor;
+    DoctorDTO doctorThatComment;
 }

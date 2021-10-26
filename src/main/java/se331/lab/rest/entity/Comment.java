@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.print.Doc;
+import java.util.List;
 
 @Data
 @Builder
@@ -17,8 +18,8 @@ public class Comment {
     Long id;
     String topic;
     String recommend;
-    @OneToOne
-    Doctor doctor;
-    @OneToOne
-    Patient patient;
+    @ManyToOne
+    Doctor doctorThatComment;
+    @ManyToOne
+    Patient patientThatComment;
 }

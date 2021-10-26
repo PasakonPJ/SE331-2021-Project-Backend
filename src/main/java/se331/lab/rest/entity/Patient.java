@@ -16,13 +16,15 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     Long id;
+    String imageurl;
     String firstname;
     String lastname;
     String username;
     String password;
     String email;
-    @OneToOne
-    Comment comment;
+    @OneToMany(mappedBy = "patientThatComment")
+            @Builder.Default
+    List<Comment> commentedPatient = new ArrayList<>();
     @ManyToOne
     Doctor doctor;
     @OneToMany(mappedBy = "patientGotVaccine")

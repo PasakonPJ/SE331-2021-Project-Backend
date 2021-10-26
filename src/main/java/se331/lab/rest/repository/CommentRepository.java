@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import se331.lab.rest.entity.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment,Long> {
-    Page<Comment> findByPatient_Id(Long id, Pageable pageable);
+    Page<Comment> findByPatientThatComment_Id(Long id, Pageable pageable);
 //    Page<Comment> deleteCommentById(Long id,Pageable pageable);
 }

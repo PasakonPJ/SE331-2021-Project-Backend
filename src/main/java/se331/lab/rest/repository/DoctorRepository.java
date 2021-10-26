@@ -11,7 +11,7 @@ import java.util.List;
 public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 
     Page<Doctor> findById(Long id, Pageable pageRequest);
-    List<Doctor> findByComment_Id(Long id);
+    List<Doctor> findByCommentedDoctor_Id(Long id);
 
     Page<Doctor> findByUsername(String id, Pageable pageRequest);
     List<Doctor> findByUsername(String id);
