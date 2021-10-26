@@ -61,10 +61,20 @@ public class CommentController {
     @DeleteMapping("/comment/{id}")
     public ResponseEntity<?> deleteComment(@PathVariable("id") Long id){
        Patient patient= patientRepository.findByCommentedPatient_Id(id).get(0);
-       int index = Integer.parseInt(String.valueOf(id-1));
-       patient.getCommentedPatient().set(index,null);
+//       int index = Integer.parseInt(String.valueOf(id-1));
+        List<Comment> patientC = patient.getCommentedPatient();
+        for(int i=0;i<patientC.size();i++){
+            if(Objects.equals(patientC.get(i).getId(), id)){
+                patient.getCommentedPatient().set(i,null);
+            }
+        }
         Doctor doctor = doctorRepository.findByCommentedDoctor_Id(id).get(0);
-        doctor.getCommentedDoctor().set(index,null);
+        List<Comment> doctorC = doctor.getCommentedDoctor();
+        for(int i=0;i<doctorC.size();i++){
+            if(Objects.equals(doctorC.get(i).getId(), id)){
+                doctor.getCommentedDoctor().set(i,null);
+            }
+        }
         commentRepository.deleteById(id);
         return ResponseEntity.ok("delete successfully");
     }
