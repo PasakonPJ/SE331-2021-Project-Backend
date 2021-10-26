@@ -1,16 +1,16 @@
-package se331.lab.rest.entity;
+package se331.lab.rest.security.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorPatientDTO {
-    Long id;
-    String firstname;
-    String lastname;
+public class AuthUserDTO {
+    List<String> role;
 }

@@ -1,4 +1,4 @@
-package se331.lab.rest.entity;
+package se331.lab.rest.security.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,13 +11,11 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientDTO {
+public class UserDTO {
     Long id;
-    String username;
     String firstname;
     String lastname;
-    String imageurl;
-    List<CommentIdDTO> commentedPatient;
-    DoctorPatientDTO doctor;
-    List<VaccinePatientDTO> vaccine;
+    String username;
+    String email;
+
 }

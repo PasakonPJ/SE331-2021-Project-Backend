@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import se331.lab.rest.security.repository.UserRepository;
 
 import java.util.List;
 
@@ -11,13 +13,11 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientDTO {
+public class AdminAuthDto {
     Long id;
     String username;
     String firstname;
     String lastname;
     String imageurl;
-    List<CommentIdDTO> commentedPatient;
-    DoctorPatientDTO doctor;
-    List<VaccinePatientDTO> vaccine;
+    List<String> authorities;
 }

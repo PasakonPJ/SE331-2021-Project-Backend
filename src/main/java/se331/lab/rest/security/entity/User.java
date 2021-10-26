@@ -52,6 +52,18 @@ public class User {
     @NotNull
     private Boolean enabled;
 
+    @Column(name = "IMAGEURL")
+    @NotNull
+    String imageurl;
+
+    @Column(name = "APPROVE")
+    @NotNull
+    private Boolean approve;
+
+//    @Column(name = "imageUrl")
+//    @ElementCollection
+//    List<String> imageUrl;
+
     @Column(name = "LASTPASSWORDRESETDATE")
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull

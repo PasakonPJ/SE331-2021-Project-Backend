@@ -65,7 +65,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/**",  "/refresh").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/patients").permitAll()
+                .antMatchers(HttpMethod.GET,"/patients/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/patients/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/signup").permitAll()
+                .antMatchers(HttpMethod.PUT,"/user/{id}").permitAll()
+                .antMatchers(HttpMethod.GET,"/doctors/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/doctors/mypatient").permitAll()
+                .antMatchers(HttpMethod.GET,"/user/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/users").permitAll()
+                .antMatchers(HttpMethod.GET,"/comment/{id}").permitAll()
+                .antMatchers(HttpMethod.POST,"/comment/{id}").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/comment/{id}").permitAll()
+                .antMatchers(HttpMethod.PUT,"/comment/edit").permitAll()
+                .antMatchers(HttpMethod.POST,"/uploadFile").permitAll()
+                .antMatchers(HttpMethod.GET,"/comment/only/{id}").permitAll()
                 .anyRequest().authenticated();
 
         // Custom JWT based security filter

@@ -3,7 +3,7 @@ package se331.lab.rest.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import javax.print.Doc;
 import java.util.List;
 
 @Data
@@ -11,13 +11,15 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Vaccine {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     Long id;
-    String vaccinatedDate;
-    String vaccineName;
+    String topic;
+    String recommend;
     @ManyToOne
-    Patient patientGotVaccine;
+    Doctor doctorThatComment;
+    @ManyToOne
+    Patient patientThatComment;
 }

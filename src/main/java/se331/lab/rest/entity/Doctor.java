@@ -19,14 +19,18 @@ public class Doctor {
     Long id;
     String firstname;
     String lastname;
+    String imageurl;
     String email;
     String password;
     String username;
     @OneToMany(mappedBy = "doctor")
     @Builder.Default
     List<Patient> patients = new ArrayList<>();
-
+    @OneToMany(mappedBy = "doctorThatComment")
+            @Builder.Default
+    List<Comment> commentedDoctor = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @Builder.Default
     private List<Authority> authorities = new ArrayList<>();
+
 }

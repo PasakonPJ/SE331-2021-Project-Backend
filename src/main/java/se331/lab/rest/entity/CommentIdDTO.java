@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorPatientDTO {
+public class CommentIdDTO {
     Long id;
-    String firstname;
-    String lastname;
 }

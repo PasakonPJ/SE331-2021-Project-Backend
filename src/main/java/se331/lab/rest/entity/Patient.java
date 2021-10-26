@@ -1,7 +1,6 @@
 package se331.lab.rest.entity;
 
 import lombok.*;
-import se331.lab.rest.security.entity.Authority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,13 +16,19 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     Long id;
+    String imageurl;
+    String firstname;
+    String lastname;
     String username;
     String password;
     String email;
+    @OneToMany(mappedBy = "patientThatComment")
+            @Builder.Default
+    List<Comment> commentedPatient = new ArrayList<>();
     @ManyToOne
     Doctor doctor;
-    @ManyToMany
-    @Builder.Default
+    @OneToMany(mappedBy = "patientGotVaccine")
+            @Builder.Default
     List<Vaccine> vaccine = new ArrayList<>();
 
 //    @ManyToMany(fetch = FetchType.EAGER)
