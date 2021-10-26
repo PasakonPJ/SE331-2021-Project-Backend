@@ -62,22 +62,18 @@ public class AuthenticationRestController {
         final String token = jwtTokenUtil.generateToken(userDetails, device);
         User user = userRepository.findById(((JwtUser) userDetails).getId()).orElse(null);
         assert user != null;
-        if(user.getApprove()){
-            Map result = new HashMap();
-            result.put("token", token);
-            if(user.getFirstname()!=null){
-                result.put("user", LabMapper.INSTANCE.getAdminAuthDTO(user));
-            }
+        Map result = new HashMap();
+        result.put("token", token);
+        if (user.getFirstname() != null) {
+            result.put("user", LabMapper.INSTANCE.getAdminAuthDTO(user));
 //        List<String> temp = new ArrayList<>();
 //        temp.add(user.getAuthorities().get(0).toString());
 //        if(user.getFirstname()!=null){
 //            result.put("user", LabMapper.INSTANCE.getUserAuthDTO(temp));
 //        }
-            return ResponseEntity.ok(result);
         }
-       return ResponseEntity.ok(false);
+        return ResponseEntity.ok(result);
     }
-
 
     @GetMapping(value = "${jwt.route.authentication.refresh}")
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
