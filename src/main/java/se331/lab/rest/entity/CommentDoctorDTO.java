@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDoctorDTO {
+    Long id;
     String topic;
     String recommend;
     DoctorDTO doctor;

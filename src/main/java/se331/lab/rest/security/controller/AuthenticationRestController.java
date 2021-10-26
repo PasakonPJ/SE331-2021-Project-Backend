@@ -56,20 +56,26 @@ public class AuthenticationRestController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-security so we can generate token
+
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+
         final String token = jwtTokenUtil.generateToken(userDetails, device);
-        Map result = new HashMap();
-        result.put("token", token);
         User user = userRepository.findById(((JwtUser) userDetails).getId()).orElse(null);
-        if(user.getFirstname()!=null){
-            result.put("user", LabMapper.INSTANCE.getAdminAuthDTO(user));
-        }
+        assert user != null;
+        if(user.getApprove()){
+            Map result = new HashMap();
+            result.put("token", token);
+            if(user.getFirstname()!=null){
+                result.put("user", LabMapper.INSTANCE.getAdminAuthDTO(user));
+            }
 //        List<String> temp = new ArrayList<>();
 //        temp.add(user.getAuthorities().get(0).toString());
 //        if(user.getFirstname()!=null){
 //            result.put("user", LabMapper.INSTANCE.getUserAuthDTO(temp));
 //        }
-        return ResponseEntity.ok(result);
+            return ResponseEntity.ok(result);
+        }
+       return ResponseEntity.ok(false);
     }
 
 
