@@ -86,4 +86,12 @@ public class PatientController {
         return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
     }
 
+    @PostMapping("/patients/vaccines/{id}")
+    public ResponseEntity<?> addMoreVaccineToPatient(@PathVariable("id") Long id,@RequestBody DoctorVaccineDTO vaccine){
+        Patient output = patientService.findById(id);
+        Vaccine v = Vaccine.builder().vaccineName(vaccine.getVaccine()).patientGotVaccine(output).vaccinatedDate(java.time.LocalDate.now().toString()).build();
+        output.getVaccine().add(v);
+        vaccineRepository.save(v);
+        return ResponseEntity.ok(LabMapper.INSTANCE.getPatientDTO(output));
+    }
 }
