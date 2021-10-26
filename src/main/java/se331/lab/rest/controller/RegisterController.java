@@ -6,14 +6,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import se331.lab.rest.security.entity.Authority;
 import se331.lab.rest.security.entity.AuthorityName;
 import se331.lab.rest.security.entity.User;
 import se331.lab.rest.security.repository.AuthorityRepository;
 import se331.lab.rest.security.repository.UserRepository;
+import se331.lab.rest.util.CloudStorageHelper;
 import se331.lab.rest.util.LabMapper;
 
+import javax.servlet.ServletException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +31,17 @@ public class RegisterController {
     PasswordEncoder encoder = new BCryptPasswordEncoder();
     List<Authority> userAuth = new ArrayList<>();
     Authority authority = new Authority();
+
     @PostMapping("/signup")
-    public ResponseEntity<?> saveUser(@RequestBody User user) {
+    public ResponseEntity<?> saveUser(@RequestBody User user){
+       ;
         User isRegis = userRepository.findByUsername(user.getUsername());
         if(isRegis==null){
             authority.setName(AuthorityName.ROLE_USER);
             userAuth.add(authority);
 //            user.getImageUrl().add(user.getImageUrl().get(0));
             String password = encoder.encode(user.getPassword());
+            user.setImageUrl(user.getImageUrl());
             user.setPassword(password);
             user.setImageUrl(user.getImageUrl());
             user.setEnabled(true);
