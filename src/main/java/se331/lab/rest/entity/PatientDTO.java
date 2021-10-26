@@ -16,6 +16,7 @@ public class PatientDTO {
     String username;
     String firstname;
     String lastname;
+    String imageurl;
     DoctorPatientDTO doctor;
     List<VaccinePatientDTO> vaccine;
 }

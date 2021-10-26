@@ -76,4 +76,10 @@ public class CommentController {
         commentRepository.save(comment);
         return ResponseEntity.ok(LabMapper.INSTANCE.getCommentDTO(comment));
     }
+
+    @GetMapping("/comment/only/{id}")
+    public ResponseEntity<?> getOnlyThatComment(@PathVariable("id") Long id){
+        Comment comments =  commentRepository.findById(id).get();
+        return ResponseEntity.ok(LabMapper.INSTANCE.getCommentDTO(comments));
+    }
 }
