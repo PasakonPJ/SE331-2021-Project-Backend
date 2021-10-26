@@ -52,8 +52,9 @@ public class User {
     @NotNull
     private Boolean enabled;
 
-    @Column
-    String imageUrl;
+    @Column(name = "IMAGEURL")
+    @NotNull
+    String imageurl;
 
     @Column(name = "APPROVE")
     @NotNull

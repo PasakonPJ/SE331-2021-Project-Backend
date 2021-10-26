@@ -50,7 +50,7 @@ public class CommentController {
     @GetMapping("/comment/{id}")
     public ResponseEntity<?> listComment(@PathVariable("id") Long id,@RequestParam(value = "_limit", required = false) Integer perPage
             , @RequestParam(value = "_page", required = false) Integer page){
-        perPage = perPage == null ? 3 : perPage;
+        perPage = perPage == null ? 6 : perPage;
         page = page == null ? 1 : page;
         Page<Comment> pageOutput = commentRepository.findByPatient_Id(id, PageRequest.of(page-1,perPage));
         HttpHeaders responseHeader = new HttpHeaders();
